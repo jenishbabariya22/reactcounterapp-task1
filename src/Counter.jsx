@@ -1,34 +1,41 @@
-import { useState } from "react"
+import { Component, useState } from "react"
 
-function Counter() {
-
-  const [count, setcount] = useState(0)
-
-  const Increses = () => {
-    setcount(count + 1)
-  }
-
-  const Decreses = () => {
-    if (count > 0) {
-      setcount(count - 1)
+class Counter extends Component {
+  constructor() {
+    super();
+    this.state = {
+      cnt: 0
     }
   }
+  render() {
 
-  const reset = () => {
-    setcount(0)
+    const Increses = () => {
+      this.setState((pur) => ({ cnt: pur.cnt + 1 }))
+    }
+
+    const Decreses = () => {
+      if (this.state.cnt > 0) {
+        this.setState((pur) => ({ cnt: pur.cnt - 1 }))
+      }
+    }
+
+    const reset = () => {
+      this.setState((pur) => ({ cnt: pur.cnt = 0 }))
+    }
+
+    return (
+      <>
+        <h1>Counter app</h1>
+        <div>
+          <button type="button" className="btn btn-success m-3" onClick={Increses} style={{ width: "80px" }}>+</button>
+          <button type="button" className="btn" style={{ background: "lightpink", width: "100px" }}>{this.state.cnt}</button>
+          <button type="button" className="btn btn-success m-3" onClick={Decreses} style={{ width: "80px" }}>-</button>
+        </div>
+        <button type="button" className="btn btn-success" onClick={reset}>Reset</button>
+      </>
+    )
   }
-
-  return (
-    <>
-      <h1>Counter app</h1>
-      <div>
-        <button type="button" class="btn btn-success m-3" onClick={Increses} style={{ width: "80px" }}>+</button>
-        <button type="button" class="btn" style={{ background: "lightpink", width: "100px" }}>{count}</button>
-        <button type="button" class="btn btn-success m-3" onClick={Decreses} style={{ width: "80px" }}>-</button>
-      </div>
-      <button type="button" class="btn btn-success" onClick={reset}>Reset</button>
-    </>
-  )
 }
+
 
 export default Counter
